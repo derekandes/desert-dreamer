@@ -3,31 +3,39 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 3f;
+    public float speed = 1.75f;
     private Vector3 movement;
     private bool facingRight = true;
     private Animator anim;
-
-    private Vector3 center;
-    public float distFromCenter = 0f;
+    private bool sitting = false;
 
     void Start ()
     {
         anim = GetComponent<Animator>();
-        center = new Vector3(0, 0, 0);
     }
 
     void Update ()
     {
-        distFromCenter = Vector3.Distance(transform.position, center);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            sitting = !sitting;
+        }
 
+        anim.SetBool("sit", sitting);
+        
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        if (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f)
+        if (Mathf.Abs(h) >= 0.01f || Mathf.Abs(v) >= 0.01f)
+        {
+            sitting = false;
             anim.SetBool("walk", true);
+            anim.SetBool("sit", false);
+        }
         else
+        {
             anim.SetBool("walk", false);
+        }
 
         if (h > 0)
         {

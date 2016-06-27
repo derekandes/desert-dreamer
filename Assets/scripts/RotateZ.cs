@@ -3,8 +3,14 @@ using System.Collections;
 
 public class RotateZ : MonoBehaviour
 {
+    public bool counter = false;
+    public float speed = 10f;
+
 	void Update ()
     {
-        transform.Rotate(0, 0, Time.deltaTime + .1f);
-	}
+        if (counter)
+            transform.Rotate(0, 0, -Time.deltaTime * speed);
+        else
+            transform.Rotate(0, 0, Time.deltaTime * speed);
+    }
 }
