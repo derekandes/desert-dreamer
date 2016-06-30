@@ -8,6 +8,7 @@ public class AnimSpeed : MonoBehaviour
     private Animator animator;
     AudioSource a;
     public float falloff = 3f;
+    public float maxAudioSpeed = 2f;
 
 	void Start ()
     {
@@ -23,7 +24,7 @@ public class AnimSpeed : MonoBehaviour
 
         animator.speed = Mathf.Clamp(speed, 0f, 1.5f);
 
-        float audioSpeed = Mathf.Clamp(speed, 0f, 2f);
+        float audioSpeed = Mathf.Clamp(speed, 0f, maxAudioSpeed);
         a.pitch = audioSpeed;
     }
 }

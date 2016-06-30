@@ -21,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
             sitting = !sitting;
         }
 
+        if (!sitting && GameManager.instance.seconds >= 20f)
+        {
+            sitting = !sitting;
+        }
+
         anim.SetBool("sit", sitting);
         
         float h = Input.GetAxis("Horizontal");
